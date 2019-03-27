@@ -1,9 +1,9 @@
 import React from 'react';
+import AuthService from '../components/AuthService';
 
 export default class LoginForm extends React.Component {
     state = {
         username: '',
-        email: '',
         password: '',
     };
 
@@ -18,7 +18,6 @@ export default class LoginForm extends React.Component {
         console.log(this.state);
         this.setState({
             username: '',
-            email: '',
             password: '',
         })
     };
@@ -32,13 +31,6 @@ export default class LoginForm extends React.Component {
                         name="username"
                         placeholder="Username"
                         value={this.state.username}
-                        onChange={e => this.change(e)}
-                    />
-                    <br />
-                    <input
-                        name="email"
-                        placeholder="Email"
-                        value={this.state.email}
                         onChange={e => this.change(e)}
                     />
                     <br />
