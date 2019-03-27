@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 export default class RegisterForm extends React.Component {
     state = {
@@ -14,13 +15,22 @@ export default class RegisterForm extends React.Component {
 
     onSubmit = e => {
         e.preventDefault();
-        console.log(this.state);
-        this.setState({
-            username: '',
-            password: '',
-        })
-    };
-
+        axios({
+            method: 'post',
+            url: '/api/v1/auth/register/',
+            data: { 
+                username: this.state.username,
+                password: this.state.password
+            }
+        }).then(result => {
+            // If successful, we do stuffs with 'result'
+            console.log (result.data)
+          })
+          .catch(error => {
+            // If unsuccessful, we notify users what went wrong
+            console.log('ERROR: ', error)
+          })
+      }
     render() {
         return (
             <div>

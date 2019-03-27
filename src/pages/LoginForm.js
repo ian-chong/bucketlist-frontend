@@ -1,5 +1,6 @@
 import React from 'react';
 import AuthService from '../components/AuthService';
+import axios from 'axios';
 
 export default class LoginForm extends React.Component {
     state = {
@@ -15,12 +16,11 @@ export default class LoginForm extends React.Component {
 
     onSubmit = e => {
         e.preventDefault();
-        console.log(this.state);
-        this.setState({
-            username: '',
-            password: '',
-        })
-    };
+        axios.post(`/api/v1/auth/login/`, {
+            username:this.state.username,
+            password:this.state.password
+        }).then(res => localStorage.setItem('cool-jwt', res.data))
+        }
 
     render() {
         return (
