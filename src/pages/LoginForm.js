@@ -6,6 +6,7 @@ export default class LoginForm extends React.Component {
     state = {
         username: '',
         password: '',
+        words: '',
     };
 
     change = e => {
@@ -19,8 +20,13 @@ export default class LoginForm extends React.Component {
         axios.post(`/api/v1/auth/login/`, {
             username:this.state.username,
             password:this.state.password
-        }).then(res => localStorage.setItem('cool-jwt', res.data))
-        }
+        }).then(res => {localStorage.setItem('cool-jwt', res.data.token)
+            console.log (res.data)
+            this.setState({ 
+                words: res.data.message,
+            })
+            }       
+        )}
 
     render() {
         return (
@@ -43,6 +49,8 @@ export default class LoginForm extends React.Component {
                     />                   
                 </form>
                 <button onClick={e => this.onSubmit(e)}>Submit</button>
+                <br />
+                {this.state.words}
             </div>
         )
     }
